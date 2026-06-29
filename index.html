@@ -16,7 +16,7 @@
         document.documentElement.setAttribute('data-theme', saved || system);
       })();
     </script>
-    <link rel="stylesheet" href="assets/css/styles.css?v=20260629-hero-network" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20260629-sar-hero" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -51,8 +51,7 @@
     </header>
 
     <main class="wrap page-shell">
-      <section class="hero hero--home hero--animated" data-reveal>
-        <canvas id="hero-network" class="hero-network" aria-hidden="true"></canvas>
+      <section class="hero hero--home" data-reveal>
         <div class="hero-card">
           <p class="eyebrow">Researcher IV • CNIT RaSS National Laboratory</p>
           <h1>Dr Ajeet Kumar</h1>
@@ -92,11 +91,12 @@
             </a>
           </div>
         </div>
-        <div class="hero-media hero-portrait">
-          <img src="gallery/profile-pic.png" alt="Portrait of Dr Ajeet Kumar" />
+        <div class="hero-media sar-hero-visual">
+          <canvas id="sar-animation" class="sar-animation" aria-hidden="true"></canvas>
+          <img class="hero-profile-cutout" src="gallery/profile-pic.png" alt="Portrait of Dr Ajeet Kumar" />
           <div class="hero-media-caption">
-            <span>Researcher IV, CNIT RaSS</span>
-            <a href="https://labrass.cnit.it/staff/ajeet-kumar/" target="_blank" rel="noreferrer">Lab profile</a>
+            <span>SAR remote sensing and radar imaging</span>
+            <a href="research.html">Research themes</a>
           </div>
         </div>
       </section>
@@ -177,7 +177,7 @@
     </footer>
 
     <script src="assets/js/theme.js"></script>
-    <script src="assets/js/hero-network.js"></script>
+    <script src="assets/js/hero-sar.js"></script>
     <script src="assets/js/main.js"></script>
   </body>
 </html>
