@@ -38,6 +38,14 @@ body {
   line-height: 1.65;
   min-height: 100vh;
 }
+.site-background {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
 img { max-width: 100%; display: block; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -102,7 +110,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   background: var(--bg-elevated);
 }
 
-.page-shell { padding: 3rem 0 4rem; }
+.page-shell {
+  position: relative;
+  z-index: 1;
+  padding: 3rem 0 4rem;
+}
 .page-intro {
   padding-bottom: 2rem;
   max-width: 740px;
@@ -137,8 +149,8 @@ p { margin: 0 0 1rem; max-width: 68ch; color: var(--text-muted); }
 }
 .hero--home {
   position: relative;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.76fr);
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 0.44fr);
+  align-items: center;
 }
 .hero-lede {
   font-size: 1.08rem;
@@ -228,34 +240,38 @@ p { margin: 0 0 1rem; max-width: 68ch; color: var(--text-muted); }
 .sar-visual-caption a {
   font-weight: 700;
 }
-.hero-profile-card {
+.hero-profile-panel {
   display: grid;
-  grid-template-columns: 82px minmax(0, 1fr);
-  align-items: center;
-  gap: 0.85rem;
+  justify-items: center;
+  gap: 0.75rem;
   border: 1px solid var(--border);
   border-radius: 1rem;
-  padding: 0.75rem;
-  background: var(--bg-elevated);
+  padding: 1rem;
+  background: color-mix(in srgb, var(--bg-elevated) 90%, transparent);
+  backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
 }
-.hero-profile-card img {
-  width: 82px;
-  height: 82px;
+.hero-profile-panel img {
+  width: min(230px, 100%);
+  aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
   object-position: center 18%;
   background: #e8eef1;
+  border: 1px solid var(--border);
 }
-.hero-profile-card strong,
-.hero-profile-card span {
+.hero-profile-copy {
+  text-align: center;
+}
+.hero-profile-copy strong,
+.hero-profile-copy span {
   display: block;
 }
-.hero-profile-card strong {
+.hero-profile-copy strong {
   color: var(--text);
   font-size: 1rem;
 }
-.hero-profile-card span {
+.hero-profile-copy span {
   color: var(--text-muted);
   font-size: 0.92rem;
 }
@@ -283,7 +299,8 @@ p { margin: 0 0 1rem; max-width: 68ch; color: var(--text-muted); }
   text-underline-offset: 3px;
 }
 .panel {
-  background: var(--bg-elevated);
+  background: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--border);
   border-radius: 1rem;
   padding: 1.5rem;
@@ -367,7 +384,7 @@ p { margin: 0 0 1rem; max-width: 68ch; color: var(--text-muted); }
   border: 1px solid var(--border);
   border-radius: 0.9rem;
   padding: 1rem;
-  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) 86%, var(--bg-elevated));
 }
 .section-pop,
 .selectable-card,
