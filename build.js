@@ -8,6 +8,7 @@ const galleryPath = path.join(dataDir, 'gallery.json');
 const scholarBibPath = path.join(dataDir, 'scholar.bib');
 const galleryDir = path.join(root, 'gallery');
 const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif']);
+const autoAppendImageExtensions = new Set(['.jpg', '.jpeg', '.webp', '.gif']);
 
 function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true });
@@ -55,6 +56,7 @@ function discoverGalleryItems(existingItems) {
   const retainedFiles = new Set(retainedExisting.map((item) => item.file));
   const appended = discoveredFiles
     .filter((file) => !retainedFiles.has(`gallery/${file}`))
+    .filter((file) => autoAppendImageExtensions.has(path.extname(file).toLowerCase()))
     .map((file) => {
       const filePath = `gallery/${file}`;
       return {
