@@ -11,16 +11,6 @@ const galleryDir = path.join(root, 'gallery');
 const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif']);
 const autoAppendImageExtensions = new Set(['.jpg', '.jpeg', '.webp', '.gif']);
 const excludedGalleryFiles = new Set([
-  '1664674012842.jpg',
-  '1664674015372.jpg',
-  '1679183124455.jpg',
-  '1686929666726.jpg',
-  '1689418845195.jpg',
-  '1730189933939.jpg',
-  '1730189939359.jpg',
-  '1756750664818.jpg',
-  '1756750669812.jpg',
-  '1756750671019.jpg',
   'profile-pic.png',
   '56348b19-9eb3-4cdb-b055-36b075561b73.png',
   '67cde603-1c4f-4664-82ec-54f3ac25f3e7.png'
