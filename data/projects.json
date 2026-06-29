@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Polarimetric and hybrid-polarimetric SAR",
+    "summary": "Research on scattering decomposition, polarimetric parameter estimation, and hybrid-pol SAR for environmental monitoring."
+  },
+  {
+    "title": "Inverse SAR and 3D Pol-InISAR",
+    "summary": "Development of methods for three-dimensional reconstruction and automatic target recognition from non-cooperative targets."
+  },
+  {
+    "title": "Lunar SAR remote sensing",
+    "summary": "Analysis of RISAT-1 and Chandrayaan-2 data for lunar surface and regolith characterisation."
+  },
+  {
+    "title": "Environmental and security applications",
+    "summary": "Applied SAR analysis for oil spill detection and the ESA EO4Security initiative."
+  },
+  {
+    "title": "Machine learning for SAR",
+    "summary": "Use of transformer and deep learning approaches to support target recognition and interpretation."
+  }
+]

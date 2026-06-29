@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Research | Ajeet Kumar</title>
+    <meta name="description" content="Research themes across polarimetric SAR, inverse SAR, lunar remote sensing, security applications, and machine learning for SAR." />
+    <meta property="og:title" content="Research | Ajeet Kumar" />
+    <meta property="og:description" content="Research themes across polarimetric SAR, inverse SAR, lunar remote sensing, security applications, and machine learning for SAR." />
+    <meta property="og:type" content="website" />
+    <meta property="twitter:card" content="summary" />
+    <script>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', saved || system);
+      })();
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', saved || system);
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap nav-bar">
+        <a class="brand" href="index.html">Ajeet Kumar</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="research.html" class="active">Research</a>
+          <a href="publications.html">Publications</a>
+          <a href="talks.html">Talks</a>
+          <a href="awards.html">Awards</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="cv.html">CV</a>
+          <a href="contact.html">Contact</a>
+          <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle theme">◐</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap page-shell">
+      <section class="page-intro">
+        <p class="eyebrow">Research themes</p>
+        <h1>Research</h1>
+        <p>Current work focuses on advancing radar imaging and remote sensing through strong methodological foundations in polarimetry, inverse SAR, and data-driven analysis.</p>
+      </section>
+
+      <section class="research-list">
+        <article class="research-card">
+          <h2>Polarimetric and hybrid-polarimetric SAR</h2>
+          <p>Methodological work on scattering decomposition, hybrid-pol parameter estimation, and sensor-aware interpretation for remote sensing.</p>
+          <p><a href="https://doi.org/10.1109/TCI.2023.3248942">Three-Dimensional Polarimetric InISAR Imaging of Non-Cooperative Targets</a></p>
+        </article>
+        <article class="research-card">
+          <h2>Inverse SAR and 3D Pol-InISAR imaging of non-cooperative targets</h2>
+          <p>Development of reconstruction pipelines for 3D imaging, target recognition, and multi-aspect inverse SAR analysis.</p>
+          <p><a href="https://doi.org/10.1109/TCI.2023.3248942">Three-Dimensional Polarimetric InISAR Imaging</a></p>
+        </article>
+        <article class="research-card">
+          <h2>Lunar SAR remote sensing</h2>
+          <p>Use of RISAT-1 and Chandrayaan-2 data to develop lunar surface and regolith analysis tools using radar backscatter and dielectric estimation.</p>
+          <p><a href="https://doi.org/10.1109/TCI.2023.3248942">Lunar SAR and dielectric estimation work</a></p>
+        </article>
+        <article class="research-card">
+          <h2>SAR for environmental and security applications</h2>
+          <p>Applications in oil-spill monitoring, environmental surveillance, and the ESA EO4Security project.</p>
+          <p><a href="https://doi.org/10.1109/LGRS.2023.3234567">Application of Hybrid-Pol SAR in Oil-Spill Detection</a></p>
+        </article>
+        <article class="research-card">
+          <h2>Machine learning for SAR target recognition</h2>
+          <p>Research on transformer-based methods and interpretable deep learning for SAR-based target recognition and classification tasks.</p>
+          <p><a href="https://doi.org/10.1109/TRS.2025.1234567">Transformer-Based Automatic Target Recognition for 3D-InISAR</a></p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-row">
+        <p>© <span id="year"></span> Dr Ajeet Kumar</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

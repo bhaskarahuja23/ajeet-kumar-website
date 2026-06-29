@@ -1,0 +1,9 @@
+{
+  "name": "ajeet-kumar-academic-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "build:gallery": "node build.js --gallery"
+  }
+}

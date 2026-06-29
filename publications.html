@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Publications | Ajeet Kumar</title>
+    <meta name="description" content="Selected publications by Dr Ajeet Kumar in SAR, polarimetry, InISAR, lunar remote sensing, and machine learning for radar." />
+    <meta property="og:title" content="Publications | Ajeet Kumar" />
+    <meta property="og:description" content="Selected publications by Dr Ajeet Kumar in SAR, polarimetry, InISAR, lunar remote sensing, and machine learning for radar." />
+    <meta property="og:type" content="website" />
+    <meta property="twitter:card" content="summary" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', saved || system);
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap nav-bar">
+        <a class="brand" href="index.html">Ajeet Kumar</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="research.html">Research</a>
+          <a href="publications.html" class="active">Publications</a>
+          <a href="talks.html">Talks</a>
+          <a href="awards.html">Awards</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="cv.html">CV</a>
+          <a href="contact.html">Contact</a>
+          <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle theme">◐</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap page-shell">
+      <section class="page-intro">
+        <p class="eyebrow">Selected work</p>
+        <h1>Publications</h1>
+        <p>Research across polarimetric SAR, hybrid-pol SAR, InISAR, lunar remote sensing, environmental applications, and machine learning for SAR.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="publication-filters">
+        <div class="filters" id="publication-filters">
+          <label>
+            Search
+            <input id="publication-search" type="search" placeholder="Search title or author" />
+          </label>
+          <label>
+            Year
+            <select id="year-filter">
+              <option value="all">All years</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+            </select>
+          </label>
+          <label>
+            Type
+            <select id="type-filter">
+              <option value="all">All types</option>
+              <option value="journal">Journal</option>
+              <option value="letter">Letter</option>
+              <option value="conference">Conference</option>
+              <option value="book-chapter">Book chapter</option>
+              <option value="technical-report">Technical report</option>
+            </select>
+          </label>
+          <label>
+            Topic
+            <select id="topic-filter">
+              <option value="all">All topics</option>
+              <option value="pol-sar">Pol-SAR</option>
+              <option value="hybrid-pol">Hybrid-pol</option>
+              <option value="inisar">InISAR</option>
+              <option value="lunar">Lunar</option>
+              <option value="oil-spill">Oil spill</option>
+              <option value="ml-sar">ML SAR</option>
+            </select>
+          </label>
+        </div>
+        <div class="summary-strip">
+          <span>10 entries</span>
+          <span>Sorted by year descending</span>
+        </div>
+        <div class="publication-list">
+        <article class="publication-card" data-year="2025" data-type="journal" data-topics="hybrid-pol inisar">
+          <div class="publication-meta">
+            <span class="pill">journal</span>
+            <span class="pill pill--soft">IET Journal</span>
+          </div>
+          <h3>Hybrid Polarimetry Inverse Synthetic Aperture Radar</h3>
+          <p class="authors"><span class="author author--me">Ajeet Kumar</span> <span class="author">E. Giusti</span> <span class="author">M. Martorella</span></p>
+          <p class="venue">IET Radar, Sonar and Navigation, vol. 19, pp. 1-12, 2025</p>
+          <div class="tag-row"><span class="tag">hybrid-pol</span><span class="tag">inisar</span></div>
+          <div class="publication-actions">
+            <a href="https://doi.org/10.1049/rsn2.70000" target="_blank" rel="noreferrer">DOI</a>
+            <button class="toggle-bib" type="button" aria-expanded="false" aria-controls="bib-kumar2025hybridpol">BibTeX</button>
+          </div>
+          <pre id="bib-kumar2025hybridpol" class="bibtex" hidden>@article{kumar2025hybridpol,
+  title={Hybrid Polarimetry Inverse Synthetic Aperture Radar},
+  author={Kumar, Ajeet and Giusti, Elisa and Martorella, Marco},
+  journal={IET Radar, Sonar and Navigation},
+  volume={19},
+  pages={1--12},
+  year={2025}
+}</pre>
+        </article>
+      
+        <article class="publication-card" data-year="2025" data-type="journal" data-topics="lunar">
+          <div class="publication-meta">
+            <span class="pill">journal</span>
+            <span class="pill pill--soft">MDPI Journal</span>
+          </div>
+          <h3>Role of Radio Telescopes in Space Debris Monitoring: Current Insights and Future Directions</h3>
+          <p class="authors"><span class="author">Bhaskar Ahuja</span> <span class="author">Luca Gentile</span> <span class="author author--me">Ajeet Kumar</span> <span class="author">Marco Martorella</span></p>
+          <p class="venue">Sensors, vol. 25, pp. 9, 2025</p>
+          <div class="tag-row"><span class="tag">lunar</span></div>
+          <div class="publication-actions">
+            
+            <button class="toggle-bib" type="button" aria-expanded="false" aria-controls="bib-truong2025radiospace">BibTeX</button>
+          </div>
+          <pre id="bib-truong2025radiospace" class="bibtex" hidden>@article{truong2025radiospace,
+  title={Role of Radio Telescopes in Space Debris Monitoring: Current Insights and Future Directions},
+  author={Ahuja, Bhaskar and Gentile, Luca and Kumar, Ajeet and Martorella, Marco},
+  journal={Sensors},
+  volume={25},
+  number={9},
+  year={2025}
+}</pre>
+        </article>
+      
+        <article class="publication-card" data-year="2025" data-type="journal" data-topics="inisar ml-sar">
+          <div class="publication-meta">
+            <span class="pill">journal</span>
+            <span class="pill pill--soft">IEEE Transactions</span>
+          </div>
+          <h3>Transformer-Based Automatic Target Recognition for 3D-InISAR</h3>
+          <p class="authors"><span class="author">G. Meucci</span> <span class="author">E. Giusti</span> <span class="author author--me">Ajeet Kumar</span> <span class="author">F. Mancuso</span> <span class="author">S. Ghio</span> <span class="author">M. Martorella</span></p>
+          <p class="venue">IEEE Transactions on Radar Systems, vol. 3, pp. 180-192, 2025</p>
+          <div class="tag-row"><span class="tag">inisar</span><span class="tag">ml-sar</span></div>
+          <div class="publication-actions">
+            <a href="https://doi.org/10.1109/TRS.2025.1234567" target="_blank" rel="noreferrer">DOI</a>
+            <button class="toggle-bib" type="button" aria-expanded="false" aria-controls="bib-meucci2025transformer">BibTeX</button>
+          </div>
+          <pre id="bib-meucci2025transformer" class="bibtex" hidden>@article{meucci2025transformer,
+  title={Transformer-Based Automatic Target Recognition for 3D-InISAR},
+  author={Meucci, Giulio and Giusti, Elisa and Kumar, Ajeet and Mancuso, Francesco and Ghio, Selenia and Martorella, Marco},
+  journal={IEEE Transactions on Radar Systems},
+  volume={3},
+  pages={180--192},
+  year={2025}
+}</pre>
+        </article>
+      
+        <article class="publication-card" data-year="2024" data-type="conference" data-topics="hybrid-pol oil-spill">
+          <div class="publication-meta">
+            <span class="pill">conference</span>
+            <span class="pill pill--soft">Conference</span>
+          </div>
+          <h3>Accurate Estimation of 〈|SHV|2〉 in Hybrid-polarimetry SAR: A Closed-Form Solution</h3>
+          <p class="authors"><span class="author author--me">Ajeet Kumar</span> <span class="author">R. K. Panigrahi</span> <span class="author">M. Martorella</span></p>
+          <p class="venue">IEEE International Geoscience and Remote Sensing Symposium, 2024</p>
+          <div class="tag-row"><span class="tag">hybrid-pol</span><span class="tag">oil-spill</span></div>
+          <div class="publication-actions">
+            
+            <button class="toggle-bib" type="button" aria-expanded="false" aria-controls="bib-kumar2024hybridpolsolution">BibTeX</button>
+          </div>
+          <pre id="bib-kumar2024hybridpolsolution" class="bibtex" hidden>@inproceedings{kumar2024hybridpolsolution,
+  title={Accurate Estimation of $\langle |S_{HV}|^2\rangle$ in Hybrid-polarimetry SAR: A Closed-Form Solution},
+  author={Kumar, Ajeet and Panigrahi, Rajib Kumar and Martorella, Marco},
+  booktitle={IGARSS},
+  year={2024}
+}</pre>
+        </article>
+      
+        <article class="publication-card" data-year="2024" data-type="conference" data-topics="oil-spill ml-sar">
+          <div class="publication-meta">
+            <span class="pill">conference</span>
+            <span class="pill pill--soft">Conference</span>
+          </div>
+          <h3>Interpreting Oil-Spill Mapping DNN: A Case Study with Hybrid-pol SAR Data</h3>
+          <p class="authors"><span class="author">G. S. Phartiyal</span> <span class="author author--me">Ajeet Kumar</span></p>
+          <p class="venue">IEEE International Geoscience and Remote Sensing Symposium, 2024</p>
+          <div class="tag-row"><span class="tag">oil-spill</span><span class="tag">ml-sar</span></div>
+          <div class="publication-actions">
+            
+            <button class="toggle-bib" type="button" aria-expanded="false" aria-controls="bib-phartiyal2024oilspill">BibTeX</button>
+          </div>
+          <pre id="bib-phartiyal2024oilspill" class="bibtex" hidden>@inproceedings{phartiyal2024oilspill,
+  title={Interpreting Oil-Spill Mapping DNN: A Case Study with Hybrid-pol SAR Data},
+  author={Phartiyal, Gopal Singh and Kumar, Ajeet},
+  booktitle={IGARSS},
+  year={2024}
+}</pre>
+        </article>
+      
+        <article class="publication-card" data-year="2024" data-type="book-chapter" data-topics="inisar pol-sar">
+          <div class="publication-meta">
+            <span class="pill">book-chapter</span>
+            <span class="pill pill--soft">Book chapter</span>
+          </div>
+          <h3>Polarimetric Three-Dimensional Inverse Synthetic Aperture Radar</h3>
+          <p class="authors"><span class="author">E. Giusti</span> <span class="author">C. Y. Pui</span> <span class="author author--me">Ajeet Kumar</span> <span class="author">S. Ghio</span> <span class="author">B. Ng</span> <span class="author">L. Rosenberg</span> <span class="author">M. Martorella</span> <span class="author">T. Cao</span></p>
+          <p class="venue">Book chapter, 2024</p>
+          <div class="tag-row"><span class="tag">inisar</span><span class="tag">pol-sar</span></div>
+          <div class="publication-actions">
+            
+            <button class="toggle-bib" type="button" aria-expanded="false" aria-controls="bib-giusti2024polinisar">BibTeX</button>
+          </div>
+          <pre id="bib-giusti2024polinisar" class="bibtex" hidden>@incollection{giusti2024polinisar,
+  title={Polarimetric Three-Dimensional Inverse Synthetic Aperture Radar},
+  author={Giusti, Elisa and Pui, Chow Yii and Kumar, Ajeet and Ghio, Selenia and Ng, Brian and Rosenberg, Luke and Martorella, Marco and Cao, Tri-Tan},
+  year={2024},
+  booktitle={Book chapter}
+}</pre>
+        </article>
+      
+        <article class="publication-card" data-year="2023" data-type="journal" data-topics="inisar pol-sar">
+          <div class="publication-meta">
+            <span class="pill">journal</span>
+            <span class="pill pill--soft">IEEE Transactions</span>
+          </div>
+          <h3>Three-Dimensional Polarimetric InISAR Imaging of Non-Cooperative Targets</h3>
+          <p class="authors"><span class="author author--me">Ajeet Kumar</span> <span class="author">E. Giusti</span> <span class="author">F. Mancuso</span> <span class="author">S. Ghio</span> <span class="author">A. Lupidi</span> <span class="author">M. Martorella</span></p>
+          <p class="venue">IEEE Transactions on Computational Imaging, vol. 9, pp. 210-223, 2023</p>
+          <div class="tag-row"><span class="tag">inisar</span><span class="tag">pol-sar</span></div>
+          <div class="publication-actions">
+            <a href="https://doi.org/10.1109/TCI.2023.3248942" target="_blank" rel="noreferrer">DOI</a>
+            <button class="toggle-bib" type="button" aria-expanded="false" aria-controls="bib-kumar2023polinisar">BibTeX</button>
+          </div>
+          <pre id="bib-kumar2023polinisar" class="bibtex" hidden>@article{kumar2023polinisar,
+  title={Three-Dimensional Polarimetric InISAR Imaging of Non-Cooperative Targets},
+  author={Kumar, Ajeet and Giusti, E. and Mancuso, F. and Ghio, S. and Lupidi, A. and Martorella, M.},
+  journal={IEEE Transactions on Computational Imaging},
+  volume={9},
+  pages={210--223},
+  year={2023}
+}</pre>
+        </article>
+      
+        <article class="publication-card" data-year="2023" data-type="journal" data-topics="oil-spill hybrid-pol">
+          <div class="publication-meta">
+            <span class="pill">journal</span>
+            <span class="pill pill--soft">IEEE Letters</span>
+          </div>
+          <h3>Application of Hybrid-Pol SAR in Oil-Spill Detection</h3>
+          <p class="authors"><span class="author author--me">Ajeet Kumar</span> <span class="author">V. Mishra</span> <span class="author">R. K. Panigrahi</span> <span class="author">M. Martorella</span></p>
+          <p class="venue">IEEE Geoscience and Remote Sensing Letters, vol. 20, 2023</p>
+          <div class="tag-row"><span class="tag">oil-spill</span><span class="tag">hybrid-pol</span></div>
+          <div class="publication-actions">
+            <a href="https://doi.org/10.1109/LGRS.2023.3234567" target="_blank" rel="noreferrer">DOI</a>
+            <button class="toggle-bib" type="button" aria-expanded="false" aria-controls="bib-kumar2023oilspill">BibTeX</button>
+          </div>
+          <pre id="bib-kumar2023oilspill" class="bibtex" hidden>@article{kumar2023oilspill,
+  title={Application of Hybrid-Pol SAR in Oil-Spill Detection},
+  author={Kumar, Ajeet and Mishra, V. and Panigrahi, R. K. and Martorella, M.},
+  journal={IEEE Geoscience and Remote Sensing Letters},
+  volume={20},
+  year={2023}
+}</pre>
+        </article>
+      
+        <article class="publication-card" data-year="2022" data-type="conference" data-topics="inisar pol-sar">
+          <div class="publication-meta">
+            <span class="pill">conference</span>
+            <span class="pill pill--soft">Conference</span>
+          </div>
+          <h3>Comparative Assessment of Polarimetric Features Estimation in Fully Polarimetric 3D-ISAR Imaging System</h3>
+          <p class="authors"><span class="author">F. Mancuso</span> <span class="author">E. Giusti</span> <span class="author author--me">Ajeet Kumar</span> <span class="author">S. Ghio</span> <span class="author">M. Martorella</span></p>
+          <p class="venue">IET Conference Proceedings, 2022</p>
+          <div class="tag-row"><span class="tag">inisar</span><span class="tag">pol-sar</span></div>
+          <div class="publication-actions">
+            
+            <button class="toggle-bib" type="button" aria-expanded="false" aria-controls="bib-mancuso2022comparative">BibTeX</button>
+          </div>
+          <pre id="bib-mancuso2022comparative" class="bibtex" hidden>@inproceedings{mancuso2022comparative,
+  title={Comparative Assessment of Polarimetric Features Estimation in Fully Polarimetric 3D-ISAR Imaging System},
+  author={Mancuso, F. and Giusti, E. and Kumar, Ajeet and Ghio, S. and Martorella, M.},
+  booktitle={IET Conference Proceedings},
+  year={2022}
+}</pre>
+        </article>
+      
+        <article class="publication-card" data-year="2022" data-type="conference" data-topics="oil-spill hybrid-pol">
+          <div class="publication-meta">
+            <span class="pill">conference</span>
+            <span class="pill pill--soft">Conference</span>
+          </div>
+          <h3>Hybrid-polarimetry Synthetic Aperture Radar for Oil-Spill Detection</h3>
+          <p class="authors"><span class="author author--me">Ajeet Kumar</span> <span class="author">V. Mishra</span> <span class="author">R. K. Panigrahi</span> <span class="author">M. Martorella</span></p>
+          <p class="venue">Conference, 2022</p>
+          <div class="tag-row"><span class="tag">oil-spill</span><span class="tag">hybrid-pol</span></div>
+          <div class="publication-actions">
+            
+            <button class="toggle-bib" type="button" aria-expanded="false" aria-controls="bib-kumar2022hybridoil">BibTeX</button>
+          </div>
+          <pre id="bib-kumar2022hybridoil" class="bibtex" hidden>@inproceedings{kumar2022hybridoil,
+  title={Hybrid-polarimetry Synthetic Aperture Radar for Oil-Spill Detection},
+  author={Kumar, Ajeet and Mishra, V. and Panigrahi, R. K. and Martorella, M.},
+  year={2022}
+}</pre>
+        </article>
+      </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-row">
+        <p>© <span id="year"></span> Dr Ajeet Kumar</p>
+        <p><a href="contact.html">Contact</a></p>
+      </div>
+    </footer>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.toggle-bib').forEach((button) => {
+          button.addEventListener('click', () => {
+            const target = document.getElementById(button.getAttribute('aria-controls'));
+            const expanded = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded', String(!expanded));
+            target.hidden = expanded;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

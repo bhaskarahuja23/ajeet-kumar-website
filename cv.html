@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CV | Ajeet Kumar</title>
+    <meta name="description" content="Curriculum vitae of Dr Ajeet Kumar." />
+    <meta property="og:title" content="CV | Ajeet Kumar" />
+    <meta property="og:description" content="Curriculum vitae of Dr Ajeet Kumar." />
+    <meta property="og:type" content="website" />
+    <meta property="twitter:card" content="summary" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', saved || system);
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap nav-bar">
+        <a class="brand" href="index.html">Ajeet Kumar</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="research.html">Research</a>
+          <a href="publications.html">Publications</a>
+          <a href="talks.html">Talks</a>
+          <a href="awards.html">Awards</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="cv.html" class="active">CV</a>
+          <a href="contact.html">Contact</a>
+          <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle theme">◐</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap page-shell">
+      <section class="page-intro">
+        <p class="eyebrow">Curriculum vitae</p>
+        <h1>CV</h1>
+        <p>Review the major sections below. A PDF version can be added later at <code>assets/docs/Ajeet_Kumar_CV_2026.pdf</code>.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Education</h2>
+        <p>PhD, IIT Roorkee, RF and Microwave Engineering, 2019.</p>
+        <h2>Experience</h2>
+        <p>Researcher IV, CNIT RaSS National Laboratory, Pisa, Italy; permanent role since October 2023. Technical Lead, ESA EO4Security project.</p>
+        <h2>Research focus</h2>
+        <p>Polarimetric SAR, hybrid-polarimetry SAR, interferometric SAR, inverse SAR, lunar remote sensing, environmental applications, machine learning for SAR.</p>
+        <h2>Honours</h2>
+        <p>URSI Senior Member; URSI Young Scientist Award 2022 and 2024; IEEE P3355 SAR Working Group Secretary.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-row">
+        <p>© <span id="year"></span> Dr Ajeet Kumar</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
