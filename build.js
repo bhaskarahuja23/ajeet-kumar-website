@@ -6,6 +6,7 @@ const dataDir = path.join(root, 'data');
 const publicationsPath = path.join(dataDir, 'publications.json');
 const galleryPath = path.join(dataDir, 'gallery.json');
 const scholarBibPath = path.join(dataDir, 'scholar.bib');
+const publicationsBibPath = path.join(root, 'publications.bib');
 const galleryDir = path.join(root, 'gallery');
 const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif']);
 const autoAppendImageExtensions = new Set(['.jpg', '.jpeg', '.webp', '.gif']);
@@ -23,20 +24,110 @@ function parseBibtex(filePath) {
   if (!fs.existsSync(filePath)) return [];
   const raw = fs.readFileSync(filePath, 'utf8');
   const entries = [];
-  const regex = /@\w+\s*\{\s*([^,]+),([\s\S]*?)\n\}/g;
-  let match;
-  while ((match = regex.exec(raw))) {
-    const citationKey = match[1].trim();
-    const body = match[2];
-    const fields = {};
-    const fieldRegex = /\b(\w+)\s*=\s*\{([^{}]*)\}/g;
-    let fieldMatch;
-    while ((fieldMatch = fieldRegex.exec(body))) {
-      fields[fieldMatch[1].toLowerCase()] = fieldMatch[2].trim();
+  let index = 0;
+  while (index < raw.length) {
+    const at = raw.indexOf('@', index);
+    if (at < 0) break;
+    const open = raw.indexOf('{', at);
+    if (open < 0) break;
+    const type = raw.slice(at + 1, open).trim().split(/\s+/)[0].toLowerCase();
+    let depth = 0;
+    let end = open;
+    for (; end < raw.length; end += 1) {
+      if (raw[end] === '{') depth += 1;
+      if (raw[end] === '}') {
+        depth -= 1;
+        if (depth === 0) {
+          end += 1;
+          break;
+        }
+      }
     }
-    entries.push({ citationKey, fields, raw: match[0] });
+    const inner = raw.slice(open + 1, end - 1);
+    const comma = inner.indexOf(',');
+    if (comma < 0) {
+      index = end;
+      continue;
+    }
+    const citationKey = inner.slice(0, comma).trim();
+    const body = inner.slice(comma + 1);
+    const fields = {};
+    let cursor = 0;
+    while (cursor < body.length) {
+      const match = body.slice(cursor).match(/\b(\w+)\s*=/);
+      if (!match) break;
+      const name = match[1].toLowerCase();
+      let pos = cursor + match.index + match[0].length;
+      while (/\s/.test(body[pos])) pos += 1;
+      let value = '';
+      if (body[pos] === '{') {
+        let fieldDepth = 0;
+        const start = pos + 1;
+        for (let j = pos; j < body.length; j += 1) {
+          if (body[j] === '{') fieldDepth += 1;
+          if (body[j] === '}') {
+            fieldDepth -= 1;
+            if (fieldDepth === 0) {
+              value = body.slice(start, j);
+              cursor = j + 1;
+              break;
+            }
+          }
+        }
+      } else if (body[pos] === '"') {
+        const start = pos + 1;
+        let j = start;
+        while (j < body.length && body[j] !== '"') j += 1;
+        value = body.slice(start, j);
+        cursor = j + 1;
+      } else {
+        let j = pos;
+        while (j < body.length && body[j] !== ',' && body[j] !== '\n') j += 1;
+        value = body.slice(pos, j);
+        cursor = j + 1;
+      }
+      fields[name] = value.replace(/\s+/g, ' ').replace(/\\&/g, '&').replace(/[{}]/g, '').trim();
+    }
+    entries.push({ type, citationKey, fields, raw: raw.slice(at, end).trim() });
+    index = end;
   }
   return entries;
+}
+
+function bibEntriesToPublications(entries) {
+  const typeMap = {
+    article: 'journal',
+    inproceedings: 'conference',
+    incollection: 'book-chapter',
+    phdthesis: 'thesis',
+    misc: 'misc'
+  };
+
+  return entries.map((entry) => {
+    const fields = entry.fields;
+    const authors = (fields.author || '')
+      .split(/\s+and\s+/i)
+      .map((author) => author.trim())
+      .filter(Boolean)
+      .map((author) => {
+        const parts = author.split(',').map((part) => part.trim());
+        return parts.length > 1 ? `${parts[1]} ${parts[0]}` : author;
+      });
+    return {
+      id: entry.citationKey,
+      type: typeMap[entry.type] || entry.type,
+      venue_tier: typeMap[entry.type] || entry.type,
+      authors,
+      title: fields.title || entry.citationKey,
+      venue: fields.journal || fields.booktitle || fields.school || fields.publisher || 'Publication',
+      volume: fields.volume,
+      pages: fields.pages,
+      year: Number(fields.year) || 0,
+      doi: fields.doi,
+      topics: [],
+      bibtex: entry.raw
+    };
+  });
 }
 
 function toTitleCase(value) {
@@ -69,6 +160,8 @@ function discoverGalleryItems(existingItems) {
 }
 
 function buildPublicationsPage(items) {
+  const years = [...new Set(items.map((item) => item.year).filter(Boolean))].sort((a, b) => b - a);
+  const types = [...new Set(items.map((item) => item.type).filter(Boolean))].sort();
   const cards = items
     .sort((a, b) => b.year - a.year)
     .map((item) => {
@@ -130,9 +223,8 @@ function buildPublicationsPage(items) {
           <a href="talks.html">Talks</a>
           <a href="awards.html">Awards</a>
           <a href="gallery.html">Gallery</a>
-          <a href="cv.html">CV</a>
           <a href="contact.html">Contact</a>
-          <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle theme">◐</button>
+          <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle theme"></button>
         </nav>
       </div>
     </header>
@@ -154,41 +246,23 @@ function buildPublicationsPage(items) {
             Year
             <select id="year-filter">
               <option value="all">All years</option>
-              <option value="2025">2025</option>
-              <option value="2024">2024</option>
-              <option value="2023">2023</option>
-              <option value="2022">2022</option>
+              ${years.map((year) => `<option value="${year}">${year}</option>`).join('')}
             </select>
           </label>
           <label>
             Type
             <select id="type-filter">
               <option value="all">All types</option>
-              <option value="journal">Journal</option>
-              <option value="letter">Letter</option>
-              <option value="conference">Conference</option>
-              <option value="book-chapter">Book chapter</option>
-              <option value="technical-report">Technical report</option>
-            </select>
-          </label>
-          <label>
-            Topic
-            <select id="topic-filter">
-              <option value="all">All topics</option>
-              <option value="pol-sar">Pol-SAR</option>
-              <option value="hybrid-pol">Hybrid-pol</option>
-              <option value="inisar">InISAR</option>
-              <option value="lunar">Lunar</option>
-              <option value="oil-spill">Oil spill</option>
-              <option value="ml-sar">ML SAR</option>
+              ${types.map((type) => `<option value="${type}">${toTitleCase(type)}</option>`).join('')}
             </select>
           </label>
         </div>
         <div class="summary-strip">
-          <span>${items.length} entries</span>
+          <span id="publication-count">${items.length} entries</span>
           <span>Sorted by year descending</span>
         </div>
         <div class="publication-list">${cards}</div>
+        <div class="publication-pagination" id="publication-pagination" aria-label="Publication pages"></div>
       </section>
     </main>
 
@@ -264,9 +338,8 @@ function buildGalleryPage(items) {
           <a href="talks.html">Talks</a>
           <a href="awards.html">Awards</a>
           <a href="gallery.html" class="active">Gallery</a>
-          <a href="cv.html">CV</a>
           <a href="contact.html">Contact</a>
-          <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle theme">◐</button>
+          <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle theme"></button>
         </nav>
       </div>
     </header>
@@ -302,7 +375,9 @@ function buildGalleryPage(items) {
 }
 
 function ensureDataFiles() {
-  const publications = readJson(publicationsPath, []);
+  const publications = fs.existsSync(publicationsBibPath)
+    ? bibEntriesToPublications(parseBibtex(publicationsBibPath))
+    : readJson(publicationsPath, []);
   const gallery = readJson(galleryPath, { items: [] });
   const bibEntries = parseBibtex(scholarBibPath);
 
@@ -328,7 +403,9 @@ function buildSite() {
   ensureDir(galleryDir);
   ensureDataFiles();
 
-  const publications = readJson(publicationsPath, []);
+  const publications = fs.existsSync(publicationsBibPath)
+    ? bibEntriesToPublications(parseBibtex(publicationsBibPath))
+    : readJson(publicationsPath, []);
   const gallery = readJson(galleryPath, { items: [] });
 
   fs.writeFileSync(path.join(root, 'publications.html'), buildPublicationsPage(publications));

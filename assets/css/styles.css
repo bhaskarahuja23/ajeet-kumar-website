@@ -6,7 +6,7 @@
   --accent: #4f6473;
   --accent-strong: #28485f;
   --accent-soft: #8fa8b6;
-  --highlight: #c8974f;
+  --highlight: #2f7d72;
   --border: #d8d2c7;
   --code-bg: #ebe7de;
   --shadow: 0 1px 2px rgba(14, 20, 24, 0.06);
@@ -21,7 +21,7 @@
   --accent: #8fa8b6;
   --accent-strong: #c1d5df;
   --accent-soft: #4f6473;
-  --highlight: #d0a35b;
+  --highlight: #62c6b8;
   --border: #2d2d2d;
   --code-bg: #272727;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
@@ -404,6 +404,7 @@ p { margin: 0 0 1rem; max-width: 68ch; color: var(--text-muted); }
   background: color-mix(in srgb, var(--bg) 86%, var(--bg-elevated));
 }
 .section-pop,
+.timeline-item,
 .selectable-card,
 .publication-card,
 .talk-card,
@@ -419,6 +420,8 @@ p { margin: 0 0 1rem; max-width: 68ch; color: var(--text-muted); }
 }
 .selectable-card:hover,
 .selectable-card:focus-within,
+.timeline-item:hover,
+.timeline-item:focus-within,
 .publication-card:hover,
 .talk-card:hover,
 .award-card:hover,
@@ -490,11 +493,27 @@ p { margin: 0 0 1rem; max-width: 68ch; color: var(--text-muted); }
   color: var(--text-muted);
   margin-bottom: 1rem;
 }
+.publication-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.publication-pagination button {
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+  background: color-mix(in srgb, var(--bg-elevated) 84%, var(--bg));
+}
+.publication-pagination button.active {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: var(--bg-elevated);
+}
 .publication-card, .talk-card, .award-card, .research-card, .gallery-card {
   border: 1px solid var(--border);
   border-radius: 0.9rem;
   padding: 1rem;
-  background: var(--bg);
+  background: color-mix(in srgb, var(--bg-elevated) 88%, var(--bg));
 }
 .authors { font-size: 0.95rem; color: var(--text); }
 .author--me { color: var(--accent); font-weight: 600; }
@@ -627,7 +646,8 @@ p { margin: 0 0 1rem; max-width: 68ch; color: var(--text-muted); }
   border: 1px solid var(--border);
   border-radius: 0.9rem;
   padding: 1rem;
-  background: color-mix(in srgb, var(--bg) 84%, var(--bg-elevated));
+  background: color-mix(in srgb, var(--bg-elevated) 90%, var(--bg));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border) 55%, transparent);
 }
 .chart-card--wide {
   grid-column: 1 / -1;
