@@ -1,42 +1,67 @@
 (function () {
-  const coauthorCanvas = document.getElementById('coauthor-chart');
-  const radarCanvas = document.getElementById('metrics-chart');
-  const yearCanvas = document.getElementById('year-chart');
-  if (!coauthorCanvas && !radarCanvas && !yearCanvas) return;
+  const metrics = {
+    totalPublications: 51,
+    journalArticles: 26,
+    conferenceArticles: 22,
+    bookChapters: 1,
+    theses: 1,
+    coauthors: 54,
+    venues: 40,
+    activeYears: 12,
+    byYear: [
+      { year: '2015', count: 1 },
+      { year: '2016', count: 2 },
+      { year: '2017', count: 3 },
+      { year: '2018', count: 1 },
+      { year: '2019', count: 6 },
+      { year: '2020', count: 2 },
+      { year: '2021', count: 3 },
+      { year: '2022', count: 8 },
+      { year: '2023', count: 5 },
+      { year: '2024', count: 8 },
+      { year: '2025', count: 10 },
+      { year: '2026', count: 2 }
+    ],
+    topCoauthors: [
+      { name: 'Panigrahi, Rajib Kumar', count: 20 },
+      { name: 'Martorella, Marco', count: 20 },
+      { name: 'Giusti, Elisa', count: 13 },
+      { name: 'Das, Anup', count: 11 },
+      { name: 'Mancuso, Francesco', count: 7 },
+      { name: 'Ghio, Selenia', count: 7 },
+      { name: 'Awasthi, Shubham', count: 4 },
+      { name: 'Jain, Kamal', count: 4 },
+      { name: 'Meucci, Giulio', count: 3 },
+      { name: 'Bhatt, Avinash', count: 3 },
+      { name: 'Goel, Tushar', count: 3 },
+      { name: 'Oveis, Amir Hosein', count: 3 }
+    ]
+  };
 
   function isDark() {
     return document.documentElement.getAttribute('data-theme') === 'dark';
   }
 
-  function palette() {
+  function colors() {
     return isDark()
       ? {
           text: '#ece8de',
           muted: '#b8c5c9',
-          grid: 'rgba(184, 197, 201, 0.28)',
+          line: 'rgba(143,168,182,0.42)',
+          soft: 'rgba(98,198,184,0.16)',
           primary: '#62c6b8',
           secondary: '#8fa8b6',
-          fill: 'rgba(98, 198, 184, 0.18)'
+          card: 'rgba(255,255,255,0.04)'
         }
       : {
           text: '#1b1b1b',
-          muted: '#4f5d62',
-          grid: 'rgba(79, 93, 98, 0.22)',
+          muted: '#3f5058',
+          line: 'rgba(79,100,115,0.32)',
+          soft: 'rgba(47,125,114,0.13)',
           primary: '#2f7d72',
           secondary: '#4f6473',
-          fill: 'rgba(47, 125, 114, 0.16)'
+          card: 'rgba(255,255,255,0.72)'
         };
-  }
-
-  function setup(canvas) {
-    const ratio = Math.min(window.devicePixelRatio || 1, 2);
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = Math.floor(rect.width * ratio);
-    canvas.height = Math.floor(rect.height * ratio);
-    const ctx = canvas.getContext('2d');
-    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-    ctx.clearRect(0, 0, rect.width, rect.height);
-    return { ctx, width: rect.width, height: rect.height };
   }
 
   function displayName(name) {
@@ -44,199 +69,139 @@
     return given ? `${given.charAt(0)}. ${surname}` : surname;
   }
 
-  function drawCoauthors(data) {
-    if (!coauthorCanvas) return;
-    const { ctx, width, height } = setup(coauthorCanvas);
-    const colors = palette();
-    const top = data.topCoauthors.slice(0, 12);
-    const max = Math.max(...top.map((item) => item.count), 1);
-    const leftWidth = width * 0.52;
-    const row = Math.min(25, (height - 70) / top.length);
+  function setHtml(id, html) {
+    const target = document.getElementById(id);
+    if (target) target.innerHTML = html;
+  }
 
-    ctx.fillStyle = colors.text;
-    ctx.font = '700 15px Inter, Segoe UI, Arial, sans-serif';
-    ctx.fillText('Top collaborators', 18, 26);
-    ctx.fillStyle = colors.muted;
-    ctx.font = '600 11px Inter, Segoe UI, Arial, sans-serif';
-    ctx.fillText(`${data.coauthors} total co-authors from BibTeX`, 18, 44);
-
-    top.forEach((item, index) => {
-      const y = 70 + index * row;
-      const barMax = leftWidth - 160;
-      const bar = (item.count / max) * barMax;
-      ctx.fillStyle = colors.muted;
-      ctx.font = '600 11px Inter, Segoe UI, Arial, sans-serif';
-      ctx.fillText(displayName(item.name), 18, y + 9);
-      ctx.fillStyle = 'rgba(127, 140, 145, 0.18)';
-      ctx.fillRect(150, y, barMax, 11);
-      ctx.fillStyle = index < 4 ? colors.primary : colors.secondary;
-      ctx.fillRect(150, y, bar, 11);
-      ctx.fillStyle = colors.text;
-      ctx.font = '700 11px Inter, Segoe UI, Arial, sans-serif';
-      ctx.fillText(String(item.count), 158 + barMax, y + 9);
-    });
-
-    const cx = width * 0.76;
-    const cy = height * 0.52;
-    const radius = Math.min(width, height) * 0.22;
-    ctx.strokeStyle = colors.grid;
-    ctx.lineWidth = 1;
-    for (let ring = 1; ring <= 3; ring += 1) {
-      ctx.beginPath();
-      ctx.arc(cx, cy, (radius * ring) / 3, 0, Math.PI * 2);
-      ctx.stroke();
-    }
-
-    top.slice(0, 10).forEach((item, index) => {
+  function renderCoauthors() {
+    const c = colors();
+    const top = metrics.topCoauthors;
+    const max = Math.max(...top.map((item) => item.count));
+    const nodes = top.slice(0, 10).map((item, index) => {
       const angle = -Math.PI / 2 + (Math.PI * 2 * index) / 10;
-      const strength = item.count / max;
-      const x = cx + Math.cos(angle) * radius;
-      const y = cy + Math.sin(angle) * radius;
-      ctx.strokeStyle = index < 4 ? colors.primary : colors.grid;
-      ctx.globalAlpha = index < 4 ? 0.75 : 0.55;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.lineTo(x, y);
-      ctx.stroke();
-      ctx.globalAlpha = 1;
-      ctx.fillStyle = index < 4 ? colors.primary : colors.secondary;
-      ctx.beginPath();
-      ctx.arc(x, y, 4 + strength * 7, 0, Math.PI * 2);
-      ctx.fill();
+      const r = 128;
+      const x = 250 + Math.cos(angle) * r;
+      const y = 172 + Math.sin(angle) * r;
+      const size = 7 + (item.count / max) * 10;
+      return { ...item, x, y, size };
     });
 
-    ctx.fillStyle = colors.primary;
-    ctx.beginPath();
-    ctx.arc(cx, cy, 16, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = isDark() ? '#101414' : '#ffffff';
-    ctx.font = '800 11px Inter, Segoe UI, Arial, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('AK', cx, cy);
-    ctx.textAlign = 'start';
-    ctx.textBaseline = 'alphabetic';
+    const links = nodes.map((node, index) => `
+      <line x1="250" y1="172" x2="${node.x}" y2="${node.y}" stroke="${index < 4 ? c.primary : c.line}" stroke-width="${index < 4 ? 1.8 : 1}" opacity="${index < 4 ? 0.72 : 0.45}" />
+    `).join('');
+
+    const nodeSvg = nodes.map((node, index) => `
+      <g>
+        <circle cx="${node.x}" cy="${node.y}" r="${node.size + 5}" fill="${c.soft}" />
+        <circle cx="${node.x}" cy="${node.y}" r="${node.size}" fill="${index < 4 ? c.primary : c.secondary}" />
+        <text x="${node.x}" y="${node.y + node.size + 18}" text-anchor="middle" fill="${c.text}" font-size="10" font-weight="700">${displayName(node.name)}</text>
+      </g>
+    `).join('');
+
+    const bars = top.slice(0, 8).map((item, index) => {
+      const width = 180 * item.count / max;
+      return `
+        <div class="coauthor-row">
+          <span>${displayName(item.name)}</span>
+          <div><i style="width:${width}px;background:${index < 4 ? c.primary : c.secondary}"></i></div>
+          <strong>${item.count}</strong>
+        </div>
+      `;
+    }).join('');
+
+    setHtml('coauthor-chart', `
+      <div class="coauthor-visual">
+        <svg viewBox="0 0 500 350" role="img" aria-label="Co-author network">
+          <circle cx="250" cy="172" r="132" fill="none" stroke="${c.line}" />
+          <circle cx="250" cy="172" r="82" fill="none" stroke="${c.line}" opacity="0.55" />
+          ${links}
+          <circle cx="250" cy="172" r="24" fill="${c.primary}" />
+          <text x="250" y="177" text-anchor="middle" fill="${isDark() ? '#111' : '#fff'}" font-size="13" font-weight="900">AK</text>
+          ${nodeSvg}
+        </svg>
+      </div>
+      <div class="coauthor-bars">${bars}</div>
+    `);
   }
 
-  function drawRadar(data) {
-    if (!radarCanvas) return;
-    const { ctx, width, height } = setup(radarCanvas);
-    const colors = palette();
+  function renderRadar() {
+    const c = colors();
     const values = [
-      ['Publications', data.totalPublications, 60],
-      ['Journals', data.journalArticles, 35],
-      ['Conferences', data.conferenceArticles, 35],
-      ['Co-authors', data.coauthors, 70],
-      ['Venues', data.venues, 50],
-      ['Years', data.activeYears, 15]
+      ['Publications', metrics.totalPublications, 60],
+      ['Journals', metrics.journalArticles, 35],
+      ['Conferences', metrics.conferenceArticles, 35],
+      ['Co-authors', metrics.coauthors, 70],
+      ['Venues', metrics.venues, 50],
+      ['Years', metrics.activeYears, 15]
     ];
-    const cx = width / 2;
-    const cy = height / 2 + 10;
-    const radius = Math.min(width, height) * 0.31;
-
-    for (let ring = 1; ring <= 4; ring += 1) {
-      ctx.strokeStyle = colors.grid;
-      ctx.beginPath();
-      values.forEach((_, index) => {
-        const angle = -Math.PI / 2 + (Math.PI * 2 * index) / values.length;
-        const r = (radius * ring) / 4;
-        const x = cx + Math.cos(angle) * r;
-        const y = cy + Math.sin(angle) * r;
-        if (index === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      });
-      ctx.closePath();
-      ctx.stroke();
-    }
-
-    values.forEach((_, index) => {
+    const cx = 250;
+    const cy = 185;
+    const radius = 118;
+    const point = (item, index, scale = 1) => {
       const angle = -Math.PI / 2 + (Math.PI * 2 * index) / values.length;
-      ctx.strokeStyle = colors.grid;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
-      ctx.stroke();
-    });
+      const r = radius * scale;
+      return [cx + Math.cos(angle) * r, cy + Math.sin(angle) * r];
+    };
+    const rings = [0.25, 0.5, 0.75, 1].map((scale) => {
+      const pts = values.map((_, index) => point(_, index, scale).join(',')).join(' ');
+      return `<polygon points="${pts}" fill="none" stroke="${c.line}" />`;
+    }).join('');
+    const axes = values.map((item, index) => {
+      const [x, y] = point(item, index, 1);
+      return `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${c.line}" />`;
+    }).join('');
+    const area = values.map((item, index) => point(item, index, Math.min(item[1] / item[2], 1)).join(',')).join(' ');
+    const labels = values.map((item, index) => {
+      const [x, y] = point(item, index, 1.26);
+      return `
+        <text x="${x}" y="${y - 8}" text-anchor="middle" fill="${c.primary}" font-size="16" font-weight="900">${item[1]}</text>
+        <text x="${x}" y="${y + 10}" text-anchor="middle" fill="${c.muted}" font-size="11" font-weight="800">${item[0]}</text>
+      `;
+    }).join('');
 
-    ctx.beginPath();
-    values.forEach((item, index) => {
-      const angle = -Math.PI / 2 + (Math.PI * 2 * index) / values.length;
-      const r = radius * Math.min(item[1] / item[2], 1);
-      const x = cx + Math.cos(angle) * r;
-      const y = cy + Math.sin(angle) * r;
-      if (index === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    });
-    ctx.closePath();
-    ctx.fillStyle = colors.fill;
-    ctx.fill();
-    ctx.strokeStyle = colors.primary;
-    ctx.lineWidth = 2.5;
-    ctx.stroke();
-
-    values.forEach((item, index) => {
-      const angle = -Math.PI / 2 + (Math.PI * 2 * index) / values.length;
-      const lx = cx + Math.cos(angle) * (radius + 34);
-      const ly = cy + Math.sin(angle) * (radius + 34);
-      ctx.fillStyle = colors.primary;
-      ctx.font = '800 12px Inter, Segoe UI, Arial, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(String(item[1]), lx, ly - 8);
-      ctx.fillStyle = colors.muted;
-      ctx.font = '700 10px Inter, Segoe UI, Arial, sans-serif';
-      ctx.fillText(item[0], lx, ly + 8);
-    });
+    setHtml('metrics-chart', `
+      <div class="metric-cards">
+        <span><strong>${metrics.totalPublications}</strong> publications</span>
+        <span><strong>${metrics.coauthors}</strong> co-authors</span>
+        <span><strong>${metrics.venues}</strong> venues</span>
+      </div>
+      <svg viewBox="0 0 500 390" role="img" aria-label="Publication metrics radar chart">
+        ${rings}
+        ${axes}
+        <polygon points="${area}" fill="${c.soft}" stroke="${c.primary}" stroke-width="3" />
+        ${values.map((item, index) => {
+          const [x, y] = point(item, index, Math.min(item[1] / item[2], 1));
+          return `<circle cx="${x}" cy="${y}" r="5" fill="${c.primary}" />`;
+        }).join('')}
+        ${labels}
+      </svg>
+    `);
   }
 
-  function drawYears(data) {
-    if (!yearCanvas) return;
-    const { ctx, width, height } = setup(yearCanvas);
-    const colors = palette();
-    const padX = 38;
-    const base = height - 34;
-    const max = Math.max(...data.byYear.map((item) => item.count), 1);
-    const barWidth = (width - padX * 2) / data.byYear.length;
-
-    ctx.strokeStyle = colors.grid;
-    ctx.beginPath();
-    ctx.moveTo(padX, base);
-    ctx.lineTo(width - padX, base);
-    ctx.stroke();
-
-    data.byYear.forEach((item, index) => {
-      const x = padX + index * barWidth + 5;
-      const usable = height - 76;
-      const barHeight = (usable * item.count) / max;
-      const y = base - barHeight;
-      ctx.fillStyle = colors.primary;
-      ctx.fillRect(x, y, Math.max(8, barWidth - 10), barHeight);
-      ctx.fillStyle = colors.text;
-      ctx.font = '800 10px Inter, Segoe UI, Arial, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(item.count, x + (barWidth - 10) / 2, y - 5);
-      ctx.fillStyle = colors.muted;
-      ctx.font = '700 9px Inter, Segoe UI, Arial, sans-serif';
-      ctx.save();
-      ctx.translate(x + (barWidth - 10) / 2, height - 13);
-      ctx.rotate(-0.55);
-      ctx.fillText(item.year, 0, 0);
-      ctx.restore();
-    });
+  function renderYears() {
+    const c = colors();
+    const max = Math.max(...metrics.byYear.map((item) => item.count));
+    const bars = metrics.byYear.map((item) => {
+      const height = 112 * item.count / max;
+      return `
+        <div class="year-bar" title="${item.year}: ${item.count} publications">
+          <strong>${item.count}</strong>
+          <i style="height:${height}px"></i>
+          <span>${item.year}</span>
+        </div>
+      `;
+    }).join('');
+    setHtml('year-chart', `<div class="year-bars" style="--bar:${c.primary};--muted:${c.muted};--text:${c.text}">${bars}</div>`);
   }
 
-  function drawAll(data) {
-    drawCoauthors(data);
-    drawRadar(data);
-    drawYears(data);
+  function renderAll() {
+    renderCoauthors();
+    renderRadar();
+    renderYears();
   }
 
-  fetch('data/publication-metrics.json')
-    .then((response) => response.json())
-    .then((data) => {
-      drawAll(data);
-      window.addEventListener('resize', () => drawAll(data));
-      document.getElementById('theme-toggle')?.addEventListener('click', () => {
-        window.setTimeout(() => drawAll(data), 0);
-      });
-    });
+  renderAll();
+  window.addEventListener('resize', renderAll);
+  document.getElementById('theme-toggle')?.addEventListener('click', () => window.setTimeout(renderAll, 0));
 })();

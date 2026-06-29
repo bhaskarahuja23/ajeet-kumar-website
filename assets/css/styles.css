@@ -656,6 +656,102 @@ p { margin: 0 0 1rem; max-width: 68ch; color: var(--text-muted); }
   display: block;
   width: 100%;
 }
+.chart-stage {
+  min-height: 390px;
+}
+.chart-stage--short {
+  min-height: 180px;
+}
+.coauthor-visual svg,
+.chart-stage svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.coauthor-visual {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.9rem;
+}
+.coauthor-bars {
+  display: grid;
+  gap: 0.45rem;
+}
+.coauthor-row {
+  display: grid;
+  grid-template-columns: minmax(7rem, 1fr) 190px 2rem;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.coauthor-row div {
+  height: 0.55rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--border) 60%, transparent);
+  overflow: hidden;
+}
+.coauthor-row i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+.coauthor-row strong {
+  color: var(--text);
+}
+.metric-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.metric-cards span {
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  padding: 0.55rem;
+  color: var(--text-muted);
+  background: color-mix(in srgb, var(--bg-elevated) 76%, transparent);
+  text-align: center;
+}
+.metric-cards strong {
+  display: block;
+  color: var(--text);
+  font-size: 1.25rem;
+  line-height: 1.1;
+}
+.year-bars {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: end;
+  gap: 0.55rem;
+  min-height: 170px;
+  padding: 0.6rem 0.2rem 0;
+}
+.year-bar {
+  display: grid;
+  justify-items: center;
+  align-items: end;
+  gap: 0.28rem;
+  min-width: 0;
+}
+.year-bar strong {
+  color: var(--text);
+  font-size: 0.78rem;
+}
+.year-bar i {
+  width: 100%;
+  min-height: 0.25rem;
+  border-radius: 0.45rem 0.45rem 0 0;
+  background: var(--bar);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--bar) 22%, transparent);
+}
+.year-bar span {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  transform: rotate(-40deg);
+  transform-origin: top center;
+  white-space: nowrap;
+}
 @media (max-width: 900px) {
   .hero, .hero--home { grid-template-columns: 1fr; }
   .highlights-grid, .cards-grid, .gallery-grid, .photo-strip, .metrics-grid { grid-template-columns: 1fr; }
