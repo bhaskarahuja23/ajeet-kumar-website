@@ -10,6 +10,21 @@ const publicationsBibPath = path.join(root, 'publications.bib');
 const galleryDir = path.join(root, 'gallery');
 const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif']);
 const autoAppendImageExtensions = new Set(['.jpg', '.jpeg', '.webp', '.gif']);
+const excludedGalleryFiles = new Set([
+  '1664674012842.jpg',
+  '1664674015372.jpg',
+  '1679183124455.jpg',
+  '1686929666726.jpg',
+  '1689418845195.jpg',
+  '1730189933939.jpg',
+  '1730189939359.jpg',
+  '1756750664818.jpg',
+  '1756750669812.jpg',
+  '1756750671019.jpg',
+  'profile-pic.png',
+  '56348b19-9eb3-4cdb-b055-36b075561b73.png',
+  '67cde603-1c4f-4664-82ec-54f3ac25f3e7.png'
+]);
 
 function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true });
@@ -141,6 +156,7 @@ function discoverGalleryItems(existingItems) {
   ensureDir(galleryDir);
   const discoveredFiles = fs.readdirSync(galleryDir)
     .filter((file) => imageExtensions.has(path.extname(file).toLowerCase()))
+    .filter((file) => !excludedGalleryFiles.has(file))
     .sort();
   const discoveredFilePaths = new Set(discoveredFiles.map((file) => `gallery/${file}`));
   const retainedExisting = (existingItems || []).filter((item) => item.file && discoveredFilePaths.has(item.file));
@@ -219,7 +235,6 @@ function buildPublicationsPage(items) {
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
           <a href="research.html">Research</a>
-          <a href="publications.html" class="active">Publications</a>
           <a href="talks.html">Talks</a>
           <a href="awards.html">Awards</a>
           <a href="gallery.html">Gallery</a>
@@ -291,6 +306,67 @@ function buildPublicationsPage(items) {
 </html>`;
 }
 
+function buildResearchPage(items) {
+  const publicationPage = buildPublicationsPage(items);
+  const intro = `<section class="page-intro">
+        <p class="eyebrow">Research and publications</p>
+        <h1>Research</h1>
+        <p>Research across polarimetric SAR, hybrid-pol SAR, InISAR, lunar remote sensing, environmental applications, and machine learning for radar.</p>
+      </section>
+
+      <section class="research-focus-grid" aria-label="Research areas">
+        <article class="research-card selectable-card">
+          <p class="eyebrow">Area 01</p>
+          <h2>Polarimetric and hybrid-pol SAR</h2>
+          <p>Scattering decomposition, hybrid-pol parameter estimation, sensor-aware interpretation, and SAR-based land and oil-spill analysis.</p>
+        </article>
+        <article class="research-card selectable-card">
+          <p class="eyebrow">Area 02</p>
+          <h2>3D InISAR imaging</h2>
+          <p>Three-dimensional inverse SAR and polarimetric InISAR workflows for non-cooperative target imaging and recognition.</p>
+        </article>
+        <article class="research-card selectable-card">
+          <p class="eyebrow">Area 03</p>
+          <h2>Lunar and planetary SAR</h2>
+          <p>RISAT-1 and Chandrayaan-2 radar analysis for lunar surface, dielectric, and regolith interpretation.</p>
+        </article>
+        <article class="research-card selectable-card">
+          <p class="eyebrow">Area 04</p>
+          <h2>Radar sensing and security</h2>
+          <p>FMCW radar, EO4Security, machine learning for SAR, and applied sensing for aerospace and security workflows.</p>
+        </article>
+      </section>`;
+
+  return publicationPage
+    .replace(/<title>Publications \| Ajeet Kumar<\/title>/, '<title>Research and Publications | Ajeet Kumar</title>')
+    .replace(/Selected publications by Dr Ajeet Kumar in SAR, polarimetry, InISAR, lunar remote sensing, and machine learning for radar\./g, 'Research themes and publications by Dr Ajeet Kumar in SAR, polarimetry, InISAR, remote sensing, and radar imaging.')
+    .replace('<a href="research.html">Research</a>', '<a href="research.html" class="active">Research</a>')
+    .replace(/<section class="page-intro">[\s\S]*?<\/section>\s*\n\s*<section class="panel" aria-labelledby="publication-filters">/, `${intro}\n\n      <section class="panel" aria-labelledby="publication-filters">`);
+}
+
+function buildPublicationsRedirectPage() {
+  return `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content="0; url=research.html#publication-filters" />
+    <title>Publications moved | Ajeet Kumar</title>
+    <link rel="canonical" href="research.html#publication-filters" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <main class="wrap page-shell">
+      <section class="panel">
+        <h1>Publications moved</h1>
+        <p>The publication list is now part of the research page.</p>
+        <p><a class="button-link" href="research.html#publication-filters">Open research and publications</a></p>
+      </section>
+    </main>
+  </body>
+</html>`;
+}
+
 function buildGalleryPage(items) {
   const cards = items.length
     ? items.map((item) => `
@@ -334,7 +410,6 @@ function buildGalleryPage(items) {
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
           <a href="research.html">Research</a>
-          <a href="publications.html">Publications</a>
           <a href="talks.html">Talks</a>
           <a href="awards.html">Awards</a>
           <a href="gallery.html" class="active">Gallery</a>
@@ -348,7 +423,7 @@ function buildGalleryPage(items) {
       <section class="page-intro">
         <p class="eyebrow">Moments and meetings</p>
         <h1>Gallery</h1>
-        <p>Selected photos from awards, conferences, field experiments, and research activity.</p>
+        <p>Selected photos from awards, radar field experiments, and research activity.</p>
       </section>
       <section class="panel">
         <div class="gallery-grid">${cards}</div>
@@ -408,7 +483,8 @@ function buildSite() {
     : readJson(publicationsPath, []);
   const gallery = readJson(galleryPath, { items: [] });
 
-  fs.writeFileSync(path.join(root, 'publications.html'), buildPublicationsPage(publications));
+  fs.writeFileSync(path.join(root, 'research.html'), buildResearchPage(publications));
+  fs.writeFileSync(path.join(root, 'publications.html'), buildPublicationsRedirectPage());
   fs.writeFileSync(path.join(root, 'gallery.html'), buildGalleryPage(gallery.items || []));
   console.log('Built publications and gallery pages.');
 }
