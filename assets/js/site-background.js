@@ -115,7 +115,7 @@
   function draw() {
     ctx.clearRect(0, 0, width, height);
     const dark = isDark();
-    drawRadar(width * 0.72, height * 0.28, Math.min(width, height) * 0.34, dark);
+    drawRadar(width * 0.5, height * 0.5, Math.min(width, height) * 0.42, dark);
     drawNetwork(dark);
     tick += 1;
     frame = requestAnimationFrame(draw);
