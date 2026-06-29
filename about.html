@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About | Ajeet Kumar</title>
+    <meta name="description" content="About Dr Ajeet Kumar, including education, professional experience, awards, service, and publication metrics." />
+    <meta property="og:title" content="About | Ajeet Kumar" />
+    <meta property="og:description" content="Education, professional experience, awards, service, and publication metrics for Dr Ajeet Kumar." />
+    <meta property="og:type" content="website" />
+    <meta property="twitter:card" content="summary" />
+    <script>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', saved || system);
+      })();
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css?v=20260629-about" />
+  </head>
+  <body>
+    <canvas id="site-background" class="site-background" aria-hidden="true"></canvas>
+    <header class="site-header">
+      <div class="wrap nav-bar">
+        <a class="brand" href="index.html">Ajeet Kumar</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="about.html" class="active">About</a>
+          <a href="research.html">Research</a>
+          <a href="publications.html">Publications</a>
+          <a href="talks.html">Talks</a>
+          <a href="awards.html">Awards</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="cv.html">CV</a>
+          <a href="contact.html">Contact</a>
+          <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle theme"></button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap page-shell">
+      <section class="about-hero panel section-pop" data-reveal>
+        <img src="gallery/profile-pic.png" alt="Portrait of Dr Ajeet Kumar" />
+        <div>
+          <p class="eyebrow">About</p>
+          <h1>Dr Ajeet Kumar</h1>
+          <p>Researcher IV at CNIT RaSS National Laboratory, Pisa, working on polarimetric SAR, hybrid-polarimetric SAR, inverse SAR, interferometric SAR, and remote sensing for Earth and security applications.</p>
+          <div class="metric-strip">
+            <span><strong>51</strong> BibTeX entries</span>
+            <span><strong>54</strong> co-authors</span>
+            <span><strong>12</strong> publication years</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel section-pop" style="margin-top: 1.5rem;" data-reveal>
+        <div class="section-heading-row">
+          <div>
+            <p class="eyebrow">Resume</p>
+            <h2>Education and professional experience</h2>
+          </div>
+          <a href="cv.html">CV page</a>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-year">2023 - present</span>
+            <div>
+              <h3>Researcher IV, CNIT RaSS National Laboratory</h3>
+              <p>Permanent Researcher IV in Pisa since October 2023; technical lead on ESA EO4Security and active contributor to SAR and radar imaging research.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-year">2021 - 2023</span>
+            <div>
+              <h3>Research activity at CNIT RaSS</h3>
+              <p>Joined CNIT RaSS in February 2021 and worked on polarimetric SAR, InISAR, security applications, and advanced radar processing methods.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-year">2019 - 2021</span>
+            <div>
+              <h3>Postdoctoral research, Chandrayaan-2</h3>
+              <p>Contributed to lunar remote sensing and radar analysis following doctoral work in RF and microwave engineering.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-year">2014 - 2019</span>
+            <div>
+              <h3>PhD, IIT Roorkee</h3>
+              <p>Doctoral research in RF and Microwave Engineering, supported by the ISRO RISAT-1 fellowship from 2014 to 2017.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel section-pop" style="margin-top: 1.5rem;" data-reveal>
+        <div class="section-heading-row">
+          <div>
+            <p class="eyebrow">Recognition</p>
+            <h2>Awards, service, and roles</h2>
+          </div>
+          <a href="awards.html">Awards page</a>
+        </div>
+        <div class="cards-grid">
+          <article class="card selectable-card">
+            <h3>URSI Young Scientist Award</h3>
+            <p>Recipient in 2022 and 2024; recognised for contributions to hybrid-pol SAR and radar remote sensing.</p>
+          </article>
+          <article class="card selectable-card">
+            <h3>IEEE AESS and SAR service</h3>
+            <p>IEEE P3355 SAR Working Group Secretary and active contributor to AESS challenge and radar community activities.</p>
+          </article>
+          <article class="card selectable-card">
+            <h3>Conference leadership</h3>
+            <p>Session chair/co-chair roles at IEEE Radar 2024, AIDCCSP 2024, and URSI AP-RASC 2025.</p>
+          </article>
+          <article class="card selectable-card">
+            <h3>Research funding and projects</h3>
+            <p>IEEE AESS Challenge Problem I funding and technical leadership on ESA EO4Security.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel section-pop metrics-panel" style="margin-top: 1.5rem;" data-reveal>
+        <div class="section-heading-row">
+          <div>
+            <p class="eyebrow">Co-authors and metrics</p>
+            <h2>Publication profile from BibTeX</h2>
+          </div>
+          <a href="publications.html">Publications</a>
+        </div>
+        <div class="metrics-grid">
+          <article class="chart-card">
+            <h3>Co-author network</h3>
+            <canvas id="coauthor-chart" height="390"></canvas>
+          </article>
+          <article class="chart-card">
+            <h3>Publication metrics</h3>
+            <canvas id="metrics-chart" height="390"></canvas>
+          </article>
+          <article class="chart-card chart-card--wide">
+            <h3>Publications by year</h3>
+            <canvas id="year-chart" height="260"></canvas>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-row">
+        <p>© <span id="year"></span> Dr Ajeet Kumar</p>
+        <p><a href="contact.html">Contact</a></p>
+      </div>
+    </footer>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/site-background.js"></script>
+    <script src="assets/js/about-metrics.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

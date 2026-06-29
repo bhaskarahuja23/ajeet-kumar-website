@@ -1,0 +1,156 @@
+{
+  "totalPublications": 51,
+  "journalArticles": 26,
+  "conferenceArticles": 22,
+  "bookChapters": 1,
+  "theses": 1,
+  "coauthors": 54,
+  "venues": 40,
+  "activeYears": 12,
+  "byYear": [
+    {
+      "year": "2015",
+      "count": 1
+    },
+    {
+      "year": "2016",
+      "count": 2
+    },
+    {
+      "year": "2017",
+      "count": 3
+    },
+    {
+      "year": "2018",
+      "count": 1
+    },
+    {
+      "year": "2019",
+      "count": 6
+    },
+    {
+      "year": "2020",
+      "count": 2
+    },
+    {
+      "year": "2021",
+      "count": 3
+    },
+    {
+      "year": "2022",
+      "count": 8
+    },
+    {
+      "year": "2023",
+      "count": 5
+    },
+    {
+      "year": "2024",
+      "count": 8
+    },
+    {
+      "year": "2025",
+      "count": 10
+    },
+    {
+      "year": "2026",
+      "count": 2
+    }
+  ],
+  "byType": [
+    {
+      "type": "article",
+      "count": 26
+    },
+    {
+      "type": "conference",
+      "count": 22
+    },
+    {
+      "type": "phdthesis",
+      "count": 1
+    },
+    {
+      "type": "misc",
+      "count": 1
+    },
+    {
+      "type": "book chapter",
+      "count": 1
+    }
+  ],
+  "topCoauthors": [
+    {
+      "name": "Panigrahi, Rajib Kumar",
+      "count": 20
+    },
+    {
+      "name": "Martorella, Marco",
+      "count": 20
+    },
+    {
+      "name": "Giusti, Elisa",
+      "count": 13
+    },
+    {
+      "name": "Das, Anup",
+      "count": 11
+    },
+    {
+      "name": "Mancuso, Francesco",
+      "count": 7
+    },
+    {
+      "name": "Ghio, Selenia",
+      "count": 7
+    },
+    {
+      "name": "Awasthi, Shubham",
+      "count": 4
+    },
+    {
+      "name": "Jain, Kamal",
+      "count": 4
+    },
+    {
+      "name": "Meucci, Giulio",
+      "count": 3
+    },
+    {
+      "name": "Bhatt, Avinash",
+      "count": 3
+    },
+    {
+      "name": "Goel, Tushar",
+      "count": 3
+    },
+    {
+      "name": "Oveis, Amir Hosein",
+      "count": 3
+    },
+    {
+      "name": "Thakur, Praveen Kumar",
+      "count": 2
+    },
+    {
+      "name": "Kumar, Shashi",
+      "count": 2
+    },
+    {
+      "name": "Sharma, Rakesh",
+      "count": 2
+    },
+    {
+      "name": "Pandey, Dharmendra Kumar",
+      "count": 2
+    },
+    {
+      "name": "Putrevu, Deepak",
+      "count": 2
+    },
+    {
+      "name": "Inderkumar, Kochar",
+      "count": 2
+    }
+  ]
+}

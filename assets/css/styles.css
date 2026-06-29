@@ -564,12 +564,89 @@ p { margin: 0 0 1rem; max-width: 68ch; color: var(--text-muted); }
   gap: 1rem;
   color: var(--text-muted);
 }
+.about-hero {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5rem;
+}
+.about-hero img {
+  width: 180px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center 18%;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+.metric-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.metric-strip span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.42rem 0.7rem;
+  background: color-mix(in srgb, var(--bg) 78%, var(--bg-elevated));
+  color: var(--text-muted);
+}
+.metric-strip strong {
+  color: var(--text);
+}
+.timeline {
+  display: grid;
+  gap: 1rem;
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--bg) 86%, var(--bg-elevated));
+}
+.timeline-year {
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.chart-card {
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--bg) 84%, var(--bg-elevated));
+}
+.chart-card--wide {
+  grid-column: 1 / -1;
+}
+.chart-card canvas {
+  display: block;
+  width: 100%;
+}
 @media (max-width: 900px) {
   .hero, .hero--home { grid-template-columns: 1fr; }
-  .highlights-grid, .cards-grid, .gallery-grid, .photo-strip { grid-template-columns: 1fr; }
+  .highlights-grid, .cards-grid, .gallery-grid, .photo-strip, .metrics-grid { grid-template-columns: 1fr; }
   .filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chart-card--wide { grid-column: auto; }
 }
 @media (max-width: 640px) {
+  .about-hero,
+  .timeline-item {
+    grid-template-columns: 1fr;
+  }
   .profile-block { flex-direction: column; align-items: flex-start; }
   .profile-photo { width: 140px; height: 140px; }
   .filters { grid-template-columns: 1fr; }

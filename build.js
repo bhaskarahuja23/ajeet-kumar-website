@@ -124,6 +124,7 @@ function buildPublicationsPage(items) {
         <a class="brand" href="index.html">Ajeet Kumar</a>
         <nav class="site-nav" aria-label="Primary">
           <a href="index.html">Home</a>
+          <a href="about.html">About</a>
           <a href="research.html">Research</a>
           <a href="publications.html" class="active">Publications</a>
           <a href="talks.html">Talks</a>
@@ -257,6 +258,7 @@ function buildGalleryPage(items) {
         <a class="brand" href="index.html">Ajeet Kumar</a>
         <nav class="site-nav" aria-label="Primary">
           <a href="index.html">Home</a>
+          <a href="about.html">About</a>
           <a href="research.html">Research</a>
           <a href="publications.html">Publications</a>
           <a href="talks.html">Talks</a>
