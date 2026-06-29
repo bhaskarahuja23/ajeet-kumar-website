@@ -74,6 +74,11 @@
       "file": "gallery/1664674012842.jpg",
       "caption": "Academic exchange",
       "location": "Research activity"
+    },
+    {
+      "file": "gallery/profile-pic.png",
+      "caption": "Profile Pic",
+      "location": "Gallery"
     }
   ]
 }
