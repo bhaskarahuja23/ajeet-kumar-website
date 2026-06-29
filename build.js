@@ -11,6 +11,9 @@ const galleryDir = path.join(root, 'gallery');
 const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif']);
 const autoAppendImageExtensions = new Set(['.jpg', '.jpeg', '.webp', '.gif']);
 const excludedGalleryFiles = new Set([
+  '1679183124455.jpg',
+  '1686929666726.jpg',
+  '1689418845195.jpg',
   'profile-pic.png',
   '56348b19-9eb3-4cdb-b055-36b075561b73.png',
   '67cde603-1c4f-4664-82ec-54f3ac25f3e7.png'
@@ -225,7 +228,6 @@ function buildPublicationsPage(items) {
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
           <a href="research.html">Research</a>
-          <a href="talks.html">Talks</a>
           <a href="awards.html">Awards</a>
           <a href="gallery.html">Gallery</a>
           <a href="contact.html">Contact</a>
@@ -400,7 +402,6 @@ function buildGalleryPage(items) {
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
           <a href="research.html">Research</a>
-          <a href="talks.html">Talks</a>
           <a href="awards.html">Awards</a>
           <a href="gallery.html" class="active">Gallery</a>
           <a href="contact.html">Contact</a>
